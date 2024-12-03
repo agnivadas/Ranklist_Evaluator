@@ -73,7 +73,8 @@ save_to_docx_table(temp_csv_path, output_docx_path)
 ## Demo
 
 Suppose the tables of ranklist pdf look like this below table structure.
-<img src="/assets/screenshot5.jpg" width="500px">
+
+<img src="/assets/screenshot5.jpg" width="600px">
 - To filter all rows with alloted quota  'All India'
      ` main_term = 'All India'`
 - Put main_term column number in main_term_index(column number starts with 0)
