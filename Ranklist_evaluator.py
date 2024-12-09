@@ -48,7 +48,7 @@ def extract_rows_with_optional_filters(pdf_path, main_term_index, rank_column_in
 
                                 # College filtering if college_column_index and target_colleges are specified
                                 if college_column_index is not None and target_colleges and college_column_index < len(row):
-                                    college_name = str(row[college_column_index]).strip().lower()  # Convert to lowercase for comparison
+                                    college_name = ' '.join(str(row[college_column_index]).replace('\n', ' ').split()).lower()  # Convert to lowercase for comparison
                                     college_matches = any(target_college.lower() in college_name for target_college in target_colleges)
                                 elif college_column_index is not None and target_colleges:
                                     print(f"College column index {college_column_index} out of bounds for table on page {page_num + 1}, table {table_num + 1}.")
