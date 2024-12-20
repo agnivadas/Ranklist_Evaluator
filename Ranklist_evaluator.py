@@ -41,9 +41,14 @@ def extract_rows_with_optional_filters(
 
                             # Check main_term and secondary_term
                             main_term_matches = main_term.lower() in (normalized_row[main_term_index].lower() if main_term_index < len(normalized_row) else "")
-                            secondary_term_matches = secondary_term is None or (
-                                secondary_term.lower() in (normalized_row[secondary_term_index].lower() if secondary_term_index < len(normalized_row) else "")
-                            )
+                            secondary_term_matches = True  # Default to True if secondary_term is None
+                            if secondary_term and secondary_term_index is not None:
+                                if secondary_term_index < len(normalized_row):
+                                    secondary_value = normalized_row[secondary_term_index]
+                                    secondary_term_matches = secondary_value and secondary_term.lower() in secondary_value.lower()
+                                else:
+                                    print(f"Skipping row: secondary_term_index out of bounds on page {page_num + 1}, table {table_num + 1}.")
+                                    secondary_term_matches = False
                             
                             # Continue only if terms match
                             if not (main_term_matches and secondary_term_matches):
